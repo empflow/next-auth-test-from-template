@@ -1,7 +1,13 @@
-import CustomLink from "@/components/custom-link"
-import packageJSON from "../package.json"
+import CustomLink from "@/components/custom-link";
+import packageJSON from "../package.json";
+import { auth } from "@/auth";
 
-export default function Index() {
+export default async function Index() {
+  console.time("timer");
+  const session = await auth();
+  console.timeEnd("timer");
+
+  console.log(session);
   return (
     <div className="space-y-2">
       <h1 className="text-3xl font-bold">NextAuth.js Example</h1>
@@ -24,5 +30,5 @@ export default function Index() {
         version: <em>next-auth@{packageJSON.dependencies["next-auth"]}</em>
       </p>
     </div>
-  )
+  );
 }
